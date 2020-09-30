@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react"
+import "./App.css"
 
-function App() {
+export default () => {
+  const [count, setCount] = useState(0)
+  const [likeText, setLikeText] = useState("likes")
+
+  function clickCheck(e) {
+    e.preventDefault()
+    setCount(count + 1)
+  }
+  useEffect(() => {
+    if (count === 1) {
+      setLikeText("like")
+    } else {
+      setLikeText("likes")
+    }
+  }, [count])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button className="likeButton" onClick={(e) => clickCheck(e)}>
+        {count} {likeText}
+      </button>
     </div>
-  );
+  )
 }
-
-export default App;
